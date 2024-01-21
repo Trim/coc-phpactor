@@ -8,7 +8,7 @@ import {
     RevealOutputChannelOn
 } from "coc.nvim";
 
-const LanguageID = 'php';
+const LanguageIDs = ['php', 'cucumber'];
 
 let languageClient: LanguageClient;
 
@@ -48,10 +48,10 @@ function createClient(config: any): LanguageClient {
     };
 
     let clientOptions: LanguageClientOptions = {
-        documentSelector: [
+        documentSelector: LanguageIDs.flatMap((LanguageID) => [
             { language: LanguageID, scheme: 'file' },
             { language: LanguageID, scheme: 'untitled' }
-        ],
+        ]),
         revealOutputChannelOn: fromStringToRevealOutputChannelOn(config.revealOutputChannelOn),
         initializationOptions: config.config
     };
